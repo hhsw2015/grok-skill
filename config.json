@@ -1,0 +1,9 @@
+{
+  "base_url": "https://grok.lvli.de",
+  "api_key": "YOUR_API_KEY",
+  "model": "grok-2-latest",
+  "timeout_seconds": 60,
+  "extra_body": {},
+  "extra_headers": {}
+}
+
