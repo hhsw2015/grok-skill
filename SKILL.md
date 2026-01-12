@@ -31,7 +31,7 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.codex\skills\grok-se
 If you prefer env vars:
 
 ```powershell
-$env:GROK_BASE_URL="https://grok.lvli.de"
+$env:GROK_BASE_URL="https://your-grok-endpoint.example"
 $env:GROK_API_KEY="YOUR_API_KEY"
 $env:GROK_MODEL="grok-2-latest"
 ```

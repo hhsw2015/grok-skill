@@ -40,6 +40,22 @@ def _normalize_api_key(api_key: str) -> str:
     return api_key
 
 
+def _normalize_base_url_value(base_url: str) -> str:
+    base_url = base_url.strip()
+    if not base_url:
+        return ""
+    placeholder = {
+        "https://your-grok-endpoint.example",
+        "YOUR_BASE_URL",
+        "BASE_URL",
+        "CHANGE_ME",
+        "REPLACE_ME",
+    }
+    if base_url.upper() in placeholder:
+        return ""
+    return base_url
+
+
 def _load_json_file(path: str) -> dict[str, Any]:
     try:
         with open(path, "r", encoding="utf-8-sig") as f:
@@ -213,11 +229,8 @@ def main() -> int:
         if not config_path:
             config_path = _default_skill_config_paths()[0]
 
-    base_url = (
-        args.base_url.strip()
-        or os.environ.get("GROK_BASE_URL", "").strip()
-        or str(config.get("base_url") or "").strip()
-        or "https://grok.lvli.de"
+    base_url = _normalize_base_url_value(
+        args.base_url.strip() or os.environ.get("GROK_BASE_URL", "").strip() or str(config.get("base_url") or "").strip()
     )
     api_key = _normalize_api_key(
         args.api_key.strip() or os.environ.get("GROK_API_KEY", "").strip() or str(config.get("api_key") or "").strip()
@@ -229,6 +242,13 @@ def main() -> int:
         timeout_seconds = float(os.environ.get("GROK_TIMEOUT_SECONDS", "0") or "0")
     if not timeout_seconds:
         timeout_seconds = float(config.get("timeout_seconds") or 0) or 60.0
+
+    if not base_url:
+        sys.stderr.write(
+            "Missing base URL: set GROK_BASE_URL, write it to config, or pass --base-url\n"
+            f"Config path: {config_path}\n"
+        )
+        return 2
 
     if not api_key:
         sys.stderr.write(

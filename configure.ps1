@@ -31,7 +31,7 @@ function Read-Default([string]$prompt, [string]$defaultValue) {
 }
 
 $baseUrl = Read-Default 'Grok base URL' ($existing.base_url)
-if (-not $baseUrl) { $baseUrl = 'https://grok.lvli.de' }
+if (-not $baseUrl) { $baseUrl = 'https://your-grok-endpoint.example' }
 
 $apiKey = Read-Default 'Grok API key' ($existing.api_key)
 $model = Read-Default 'Model' ($existing.model)

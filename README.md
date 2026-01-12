@@ -1,6 +1,6 @@
 # grok-search (Codex skill)
 
-This repo is a Codex CLI skill that lets Codex run aggressive web research via your OpenAI-compatible Grok 2api endpoint (e.g. `https://grok.lvli.de`).
+This repo is a Codex CLI skill that lets Codex run aggressive web research via your OpenAI-compatible Grok 2api endpoint.
 
 ## Install
 
