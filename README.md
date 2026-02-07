@@ -28,6 +28,9 @@ git clone https://github.com/Frankieli123/grok-skill.git
 # Enter the directory
 cd grok-skill
 
+# Run the install script (macOS/Linux)
+bash ./install.sh
+
 # Run the install script (Windows PowerShell)
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
@@ -36,13 +39,14 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 1. Download ZIP from: https://github.com/Frankieli123/grok-skill/archive/refs/heads/main.zip
 2. Extract to any folder
-3. Run `install.ps1` in PowerShell
+3. Run `install.sh` (macOS/Linux) or `install.ps1` (Windows PowerShell)
 
 #### Installation Path
 
 After installation, the skill will be located at:
 ```
-C:\Users\<YourUsername>\.codex\skills\grok-search\
+macOS/Linux: ~/.codex/skills/grok-search/
+Windows: C:\Users\<YourUsername>\.codex\skills\grok-search\
 ```
 
 ### ⚙️ Configuration
@@ -151,6 +155,7 @@ grok-search/
 ├── SKILL.md           # Skill definition for Codex/Claude
 ├── README.md          # This file
 ├── config.json        # Configuration template
+├── install.sh         # Installation script (macOS/Linux)
 ├── install.ps1        # Installation script
 ├── configure.ps1      # Interactive configuration script
 └── scripts/
@@ -183,6 +188,9 @@ git clone https://github.com/Frankieli123/grok-skill.git
 # 进入目录
 cd grok-skill
 
+# 运行安装脚本（macOS/Linux）
+bash ./install.sh
+
 # 运行安装脚本（Windows PowerShell）
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
@@ -191,13 +199,14 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 1. 从这里下载 ZIP：https://github.com/Frankieli123/grok-skill/archive/refs/heads/main.zip
 2. 解压到任意文件夹
-3. 在 PowerShell 中运行 `install.ps1`
+3. 运行 `install.sh`（macOS/Linux）或在 PowerShell 中运行 `install.ps1`
 
 #### 安装路径
 
 安装完成后，技能将位于：
 ```
-C:\Users\<你的用户名>\.codex\skills\grok-search\
+macOS/Linux: ~/.codex/skills/grok-search/
+Windows: C:\Users\<你的用户名>\.codex\skills\grok-search\
 ```
 
 ### ⚙️ 配置说明
@@ -306,6 +315,7 @@ grok-search/
 ├── SKILL.md           # Codex/Claude 技能定义文件
 ├── README.md          # 本文件
 ├── config.json        # 配置模板
+├── install.sh         # 安装脚本（macOS/Linux）
 ├── install.ps1        # 安装脚本
 ├── configure.ps1      # 交互式配置脚本
 └── scripts/
