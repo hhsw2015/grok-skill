@@ -75,15 +75,46 @@ def _normalize_base_url(base_url: str) -> str:
 
 
 def _coerce_json_object(text: str) -> dict[str, Any] | None:
+    def _try_parse_json_object(candidate: str) -> dict[str, Any] | None:
+        try:
+            value = json.loads(candidate)
+        except json.JSONDecodeError:
+            return None
+        return value if isinstance(value, dict) else None
+
+    def _find_first_json_object(candidate: str) -> dict[str, Any] | None:
+        decoder = json.JSONDecoder()
+        for index, char in enumerate(candidate):
+            if char != "{":
+                continue
+            try:
+                value, _ = decoder.raw_decode(candidate[index:])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(value, dict):
+                return value
+        return None
+
     text = text.strip()
     if not text:
         return None
-    if text.startswith("{") and text.endswith("}"):
-        try:
-            value = json.loads(text)
-            return value if isinstance(value, dict) else None
-        except json.JSONDecodeError:
-            return None
+
+    parsed = _try_parse_json_object(text)
+    if parsed is not None:
+        return parsed
+
+    for match in re.finditer(r"```(?:json)?\s*(.*?)\s*```", text, flags=re.IGNORECASE | re.DOTALL):
+        block = match.group(1).strip()
+        if not block:
+            continue
+        parsed = _try_parse_json_object(block) or _find_first_json_object(block)
+        if parsed is not None:
+            return parsed
+
+    parsed = _find_first_json_object(text)
+    if parsed is not None:
+        return parsed
+
     return None
 
 
